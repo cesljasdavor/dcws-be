@@ -6,6 +6,7 @@ class CreatePurchases < ActiveRecord::Migration[5.0]
       t.on_the_way :boolean, null: false
       t.integer :user_id, null:false
       t.integer :product_id, null:false
+      t.string  :product_title, null: false
       t.integer :receipt_id, null:false
       t.timestamps
     end

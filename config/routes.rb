@@ -31,5 +31,14 @@ Rails.application.routes.draw do
   post "/categories/update_category", to: "categories#update_category"
 
 
+  # kupovina
+  post "/receipts/buy", to: "receipts#buy"
 
+  # stavke kupovine
+  post "/purchases/bought", to: "purchases#bought"
+  post "/purchases/sold", to: "purchases#sold"
+  post "/purchases/set_on_the_way", to: "purchases#set_on_the_way"
+
+  # proporuciteljski sustav
+  post "/recommendation_system/recommand", to: "application#recommand"
 end
