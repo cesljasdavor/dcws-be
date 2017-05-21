@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  RECOMMENDATION_SIZE = 3
+
   def all_products
     @products = Product.all
 
@@ -42,6 +44,38 @@ class ProductsController < ApplicationController
     else
       render nothing: true, status: 400
     end
+  end
+
+  def recommend
+    product = Product.find product_id
+    if product.nil?
+      render nothing: true, status: 400
+    end
+
+    recommended_products_ids = []
+    product.receipts.each do |receipt|
+      receipt.purchases.each do |purchase|
+        if purchase.product_id != product.id
+          recommended_products_ids.append(purchase.product_id)
+          if recommended_products_ids.length === RECOMMENDATION_SIZE
+            render json: recommended_products_ids
+            return
+          end
+        end
+      end
+    end
+
+    # puni do RECOMMENDATION_SIZE
+    Product.find_by_sql(
+           "SELECT products.id FROM products
+            WHERE products.id NOT IN ( #{recommended_products_ids.to_s})
+            AND products.id != #{product.id}
+            LIMIT #{RECOMMENDATION_SIZE - recommended_products_ids.length}"
+    ).each do |product_id|
+      recommended_products_ids.append(product_id.id)
+    end
+
+    render json: recommended_products_ids
   end
 
   private
