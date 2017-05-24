@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+  require 'set'
   RECOMMENDATION_SIZE = 3
 
   def all_products
@@ -52,24 +52,26 @@ class ProductsController < ApplicationController
       render nothing: true, status: 400
     end
 
-    recommended_products_ids = []
+    recommended_products_ids = Set.new()
     product.receipts.each do |receipt|
       receipt.purchases.each do |purchase|
         if purchase.product_id != product.id
-          recommended_products_ids.append(purchase.product_id)
-          if recommended_products_ids.length === RECOMMENDATION_SIZE
+          recommended_products_ids.add(purchase.product_id)
+          if recommended_products_ids.size === RECOMMENDATION_SIZE
             render json: recommended_products_ids
             return
           end
         end
       end
     end
-
+    # dalje ne možemo dobiti duplikate
+    recommended_products_ids = recommended_products_ids.to_a
     # puni do RECOMMENDATION_SIZE
     Product.find_by_sql(
            "SELECT products.id FROM products
-            WHERE products.id NOT IN ( #{recommended_products_ids.to_s})
-            AND products.id != #{product.id}
+            WHERE" + (recommended_products_ids.length === 0 ? "" :
+               " products.id NOT IN (#{recommended_products_ids.join(',')}) AND") +
+            " products.id != #{product.id}
             LIMIT #{RECOMMENDATION_SIZE - recommended_products_ids.length}"
     ).each do |product_id|
       recommended_products_ids.append(product_id.id)

@@ -40,5 +40,5 @@ Rails.application.routes.draw do
   post "/purchases/set_on_the_way", to: "purchases#set_on_the_way"
 
   # proporuciteljski sustav
-  post "/products/recommand", to: "products#recommand"
+  post "/products/recommend", to: "products#recommend"
 end
