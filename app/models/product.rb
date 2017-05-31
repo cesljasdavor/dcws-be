@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   has_many :ratings, dependent: :delete_all
   has_many :product_categories, dependent: :delete_all
   has_many :categories, through: :product_categories
+  # mount_uploader :image, ImageUploader
+  # has_one :image
   # query ako hoćeš pronaći tko prodaje proizvod
 
   validates :title, presence: true

@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.decimal :price, null: false
       t.boolean :availability, default: true
       t.string :email_seller, null: false
+      t.string :picture
       t.timestamps
     end
   end

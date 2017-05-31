@@ -41,4 +41,7 @@ Rails.application.routes.draw do
 
   # proporuciteljski sustav
   post "/products/recommend", to: "products#recommend"
+
+  # slike za proizvod
+  resource :image_uploads, only: [:create]
 end
