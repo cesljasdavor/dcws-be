@@ -1,5 +1,5 @@
-Projekt izrađen kao back-end aplikacija završnog rada
+Project created as a back-end application of the final assignment in Faculty of Electrical Engineering and Computing, University of Zagreb.
 
-Projekt je pisan u programskom okviru Ruby on Rails verzije 5
+The project was written in the Ruby on Rails version 5 program
 
-Projekt predstavlja RESTful servis za internetski dućan DCWS(Davor Češljaš Web Shop)
+The project represents the RESTful service for the DCWS (Davor Češljaš Web Shop)
