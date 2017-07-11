@@ -1,24 +1,5 @@
-# README
+Projekt izrađen kao back-end aplikacija završnog rada
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projekt je pisan u programskom okviru Ruby on Rails verzije 5
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Projekt predstavlja RESTful servis za internetski dućan DCWS(Davor Češljaš Web Shop)
